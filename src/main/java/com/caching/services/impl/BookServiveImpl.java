@@ -17,7 +17,7 @@ public class BookServiveImpl implements BookService {
     @Autowired
     private BookRepository bookRepository;
     @Override
-    @Cacheable(cacheNames = "books" , key = "#id" , condition = "#result == null")
+    @Cacheable(cacheNames = "books" , condition = "#result == null" , keyGenerator = "customKeyGenerator")
     public Book findBookById(Integer id) {
         log.info("fetching data from database");
         return bookRepository.findById(id).orElse(null);
